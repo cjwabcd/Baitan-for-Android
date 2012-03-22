@@ -1,26 +1,17 @@
 package com.baitan001;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import android.R.color;
+
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -34,20 +25,22 @@ public class ItemList extends Activity {
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.itemlist);
  
-    	//String request_URL = "http://tiaosao.org/book.json"; 
-        //String response = "";                
+    	String request_URL = "http://tiaosao.org/book.json"; 
+        String response = "";                
         /** Retrieve default item list*/
-        /*try {
+        try {
 			response = connectionPool.connInit(request_URL);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 
+        
+        ItemInfo item = (ItemInfo)JSONParser(response);
         
         TableLayout layout = (TableLayout)findViewById(R.id.tableLayout1);
 		for (int i = 0; i < 6; i++)
-        		layout.addView(row(new ItemInfo()));
+        		layout.addView(row(item));
         
         
                
@@ -55,7 +48,27 @@ public class ItemList extends Activity {
     
     
     
-    private TableRow row (final ItemInfo item){
+    private ItemInfo JSONParser(String response) {
+		// TODO Auto-generated method stub
+		ItemInfo item = new ItemInfo();
+		JSONObject jObj;
+		try {
+			jObj = new JSONObject(response);
+			item.bookname = jObj.getString("bookname");
+			item.baitanprice = Integer.parseInt(jObj.getString("baitanprice"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		
+    	return item;
+	}
+
+
+
+	private TableRow row (final ItemInfo item){
 		/*Retrieve info from Iteminfo object and generate an item row */
     	
 		TableRow template=(TableRow)findViewById(R.id.itemlist_row);
@@ -83,14 +96,15 @@ public class ItemList extends Activity {
     	
         OnTouchListener showItemListener = new OnTouchListener() {
     		Intent i = new Intent();
+    		
             public boolean onTouch(View v, MotionEvent event) {
   	    	  // TODO Auto-generated method stub
   	    	//scheduler.getGestureDetector().onTouchEvent(event);	
   	    	  switch (event.getAction()) { 	  
   	    	        case MotionEvent.ACTION_DOWN:v.setBackgroundColor(Color.GRAY);	//按下
   	    	            break;
-  	    	        case MotionEvent.ACTION_UP:v.setBackgroundColor(Color.WHITE); i.setClassName("com.baitan001",
-  	                        "com.baitan001.SignIn");
+  	    	        case MotionEvent.ACTION_UP:v.setBackgroundColor(Color.WHITE); i.putExtra("id","Newbook");i.setClassName("com.baitan001",
+  	                        "com.baitan001.ShowItem");
   	                startActivity(i);//抬起
   	    	            break;
   	    	        default:
@@ -106,28 +120,6 @@ public class ItemList extends Activity {
         return layout;
     }
     
-    public static Bitmap getHttpBitmap(String url) {
-		URL myFileUrl = null;
-		Bitmap bitmap = null;
-		try {
-			myFileUrl = new URL(url);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		try {
-			HttpURLConnection conn = (HttpURLConnection) myFileUrl
-					.openConnection();
-			//conn.setConnectTimeout(0);
-			conn.setDoInput(true);
-			conn.connect();
-			InputStream is = conn.getInputStream();
-			bitmap = BitmapFactory.decodeStream(is);
-			is.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return bitmap;
-	}
 
 
 
