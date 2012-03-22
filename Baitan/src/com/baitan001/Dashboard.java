@@ -23,12 +23,13 @@ public class Dashboard extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        try {
+        
+        /*try {
 			connectionPool.connInit("http://tiaosao.org/book.json");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
         Button showListBtn = (Button)findViewById(R.id.showListBtn);
        
         
@@ -37,7 +38,7 @@ public class Dashboard extends Activity {
               // do something when the button is clicked
             	Intent i = new Intent();
                 i.setClassName("com.baitan001",
-                               "com.baitan001.SignIn");
+                               "com.baitan001.ItemList");
                 startActivity(i);
             }
         };
@@ -65,9 +66,5 @@ public class Dashboard extends Activity {
     	return true;
     }
     
-    private void clickListener(){    	
-    	 Intent i = new Intent();
-         i.setClassName("com.baitan001.BaitanActivity","com.baitan001.ItemListActivity");
-         startActivity(i); 	   	
-    }
+
 }
