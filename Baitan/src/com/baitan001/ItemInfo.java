@@ -12,8 +12,9 @@ public class ItemInfo{
 	public String doubansimg = "http://img1.douban.com/mpic/s1106991.jpg";
 	public int price = 0;
 	public int baitanprice = 15;
+	public String seller;
 	
-	public void ItemInfo(){
+	public ItemInfo(){
 		product_ID = "1238";
 		bookname = "Who moved my cheese";
 		bookauthor = "Whoknows";
@@ -23,6 +24,7 @@ public class ItemInfo{
 		doubansimg = "http://img1.douban.com/mpic/s1106991.jpg";
 		price = 0;
 		baitanprice = 0;
+		seller = "XiaoMaGe";
 	}
 	
 	

@@ -49,21 +49,19 @@ public class ItemList extends Activity {
     
     
     private ItemInfo JSONParser(String response) {
-		// TODO Auto-generated method stub
+		// TODO Read in a JSONString and generate an item object
 		ItemInfo item = new ItemInfo();
 		JSONObject jObj;
 		try {
 			jObj = new JSONObject(response);
 			item.bookname = jObj.getString("bookname");
 			item.baitanprice = Integer.parseInt(jObj.getString("baitanprice"));
+			item.seller = jObj.getString("seller");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
-		
-    	return item;
+		return item;
 	}
 
 
@@ -77,43 +75,45 @@ public class ItemList extends Activity {
 		layout.setLayoutParams(layoutParams);
 		layout.setBackgroundColor(Color.WHITE);
 		ImageView imageView=new ImageView(this);
-		//Bitmap bitmap = connectionPool.getLocalBitmap("res/drawable-mdpi/s1483422.jpg");
+
 		Bitmap bitmap = connectionPool.getHttpBitmap(item.doubansimg);
 		imageView.setImageBitmap(bitmap);
-		//imageView.setImageResource("res/s1483422.jpg");
-		//imageView.setImageURI(item.doubansimg);
-		
-		imageView.setPadding(2,6,2,0); // left, top, right, bottom
-		layout.addView(imageView);//,layoutParams);
+		imageView.setPadding(2,6,2,0);
+		layout.addView(imageView);
 		TextView text=new TextView(this);
 		TextView price = new TextView(this);
-		text.setText(item.bookname);
-		price.setText("￥" +item.baitanprice);
+		text.setText("\n"+item.bookname + "\n卖家：" + item.seller);
+		price.setText("\n\n\n         ￥" +item.baitanprice);
 		text.setTypeface(Typeface.DEFAULT_BOLD);	
 		layout.addView(text);
 		layout.addView(price);
     	
     	
-        OnTouchListener showItemListener = new OnTouchListener() {
-    		Intent i = new Intent();
-    		
-            public boolean onTouch(View v, MotionEvent event) {
-  	    	  // TODO Auto-generated method stub
-  	    	//scheduler.getGestureDetector().onTouchEvent(event);	
-  	    	  switch (event.getAction()) { 	  
-  	    	        case MotionEvent.ACTION_DOWN:v.setBackgroundColor(Color.GRAY);	//按下
-  	    	            break;
-  	    	        case MotionEvent.ACTION_UP:v.setBackgroundColor(Color.WHITE); i.putExtra("id","Newbook");i.setClassName("com.baitan001",
-  	                        "com.baitan001.ShowItem");
-  	                startActivity(i);//抬起
-  	    	            break;
-  	    	        default:
-  	    	            break;
-  	    	  }
-  	    	  return true;
-            }
-        };
-        
+		OnTouchListener showItemListener = new OnTouchListener() {
+			Intent i = new Intent();
+
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Listen to the touch event on item row
+
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					v.setBackgroundColor(Color.GRAY);
+					break;
+				case MotionEvent.ACTION_UP:
+					v.setBackgroundColor(Color.WHITE);
+					i.putExtra("id", "book.json");
+					i.setClassName("com.baitan001", "com.baitan001.ShowItem");
+					startActivity(i);
+					break;
+				case MotionEvent.ACTION_CANCEL:
+					v.setBackgroundColor(Color.WHITE);
+					break;
+				default:
+					break;
+				}
+				return true;
+			}
+		};
 
         
         layout.setOnTouchListener((OnTouchListener) showItemListener);

@@ -1,5 +1,8 @@
 package com.baitan001;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,22 +18,53 @@ public class ShowItem extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showitem);
-        Intent inte=getIntent();     
-        String id=inte.getStringExtra("id");  
+        Intent i = getIntent();     
+        String id = i.getStringExtra("id");  
+        
+    	String request_URL = "http://tiaosao.org/" + id; 
+        String response = "";                
+        /** Retrieve default item list*/
+        try {
+			response = connectionPool.connInit(request_URL);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     
-	    ItemInfo item = new ItemInfo();
+        ItemInfo item = (ItemInfo)JSONParser(response);
+	    
 	    LinearLayout layout = (LinearLayout) findViewById(R.id.showitem1);
 		ImageView imageView = new ImageView(this);
 		Bitmap bitmap = connectionPool.getHttpBitmap(item.doubansimg);
 		imageView.setImageBitmap(bitmap);
-		imageView.setPadding(2,6,2,0); // left, top, right, bottom
-		layout.addView(imageView);//,layoutParams);
+		imageView.setPadding(2,6,2,0);
+		layout.addView(imageView);
 		TextView text=new TextView(this);
 		TextView price = new TextView(this);
-		text.setText(id);
-		price.setText("￥" +item.baitanprice);
+		text.setText("\n"+item.bookname + "\n卖家：" + item.seller);
+		price.setText("￥" + item.baitanprice);
 		text.setTypeface(Typeface.DEFAULT_BOLD);	
 		layout.addView(text);
 		layout.addView(price);
     }
+    
+    
+    
+    private ItemInfo JSONParser(String response) {
+		// TODO Read in a JSONString and generate an item object
+		ItemInfo item = new ItemInfo();
+		JSONObject jObj;
+		try {
+			jObj = new JSONObject(response);
+			item.bookname = jObj.getString("bookname");
+			item.baitanprice = Integer.parseInt(jObj.getString("baitanprice"));
+			item.seller = jObj.getString("seller");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
+	}
+    
+    
 }
