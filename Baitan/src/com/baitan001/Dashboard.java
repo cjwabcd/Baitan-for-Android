@@ -21,22 +21,32 @@ public class Dashboard extends Activity {
 			e.printStackTrace();
 		}*/
         Button showListBtn = (Button)findViewById(R.id.showListBtn);
-       
-        
-        OnClickListener showListLsnr = new OnClickListener() {
-            public void onClick(View v) {
-              // do something when the button is clicked
-            	Intent i = new Intent();
-                i.setClassName("com.baitan001",
-                               "com.baitan001.ItemList");
-                startActivity(i);
-            }
-        };
-        
-        showListBtn.setOnClickListener(showListLsnr);
+        Button postBtn = (Button)findViewById(R.id.postBtn);
+       // Button showListBtn = (Button)findViewById(R.id.showListBtn);
+       // Button showListBtn = (Button)findViewById(R.id.showListBtn);
+
+        showListBtn.setOnClickListener(buttonClickListener);
+        postBtn.setOnClickListener(buttonClickListener);
         
         
     }
+    
+    OnClickListener buttonClickListener = new OnClickListener() {
+        public void onClick(View v) {
+          // do something when the button is clicked
+        	Intent i = new Intent();
+        	switch(v.getId()){
+	        	case R.id.showListBtn: 
+	                i.setClassName("com.baitan001",
+	                        "com.baitan001.ItemList"); break;
+	        	case R.id.postBtn: 
+	                i.setClassName("com.baitan001",
+	                        "com.baitan001.sell"); break;          
+        	}
+            startActivity(i);
+        }
+    };
+    
     
     
     /* Initialize the connection with server, retrieve Logo*/

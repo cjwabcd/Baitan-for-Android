@@ -11,7 +11,7 @@ public class BaitanActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         try {
-			connectionPool.connInit("http://tiaosao.org/book.json");
+			connectionPool.connInit("http://www.baitan001.com");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,10 +35,6 @@ public class BaitanActivity extends Activity {
     	// TODO displogo
     	return true;
     }
+       	
     
-    private void clickListener(){    	
-    	 Intent i = new Intent();
-         i.setClassName("com.baitan001.BaitanActivity","com.baitan001.ItemListActivity");
-         startActivity(i); 	   	
-    }
 }

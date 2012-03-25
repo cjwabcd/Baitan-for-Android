@@ -21,7 +21,7 @@ public class ShowItem extends Activity {
         Intent i = getIntent();     
         String id = i.getStringExtra("id");  
         
-    	String request_URL = "http://tiaosao.org/" + id; 
+    	String request_URL = "http://www.baitan001.com/m/itemid/" + id; 
         String response = "";                
         /** Retrieve default item list*/
         try {
@@ -41,7 +41,9 @@ public class ShowItem extends Activity {
 		layout.addView(imageView);
 		TextView text=new TextView(this);
 		TextView price = new TextView(this);
-		text.setText("\n"+item.bookname + "\n卖家：" + item.seller);
+		text.setText("\n"+item.bookname 
+				+ "\n卖家：" + item.contactpeople 
+				+ "\n电话：" + item.tel);
 		price.setText("￥" + item.baitanprice);
 		text.setTypeface(Typeface.DEFAULT_BOLD);	
 		layout.addView(text);
@@ -57,8 +59,10 @@ public class ShowItem extends Activity {
 		try {
 			jObj = new JSONObject(response);
 			item.bookname = jObj.getString("bookname");
-			item.baitanprice = Integer.parseInt(jObj.getString("baitanprice"));
-			item.seller = jObj.getString("seller");
+			item.baitanprice = jObj.getString("baitanprice");
+			item.contactpeople = jObj.getString("contactpeople");
+			item.tel = jObj.getString("tel");
+			item.doubansimg = jObj.getString("doubansimg");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -22,6 +22,7 @@
             <activity android:name=".ShowItem"></activity>
             <activity android:name=".SignIn" android:label="@string/signin"></activity>
             <activity android:name="ItemList"></activity>
+            <activity android:name="Sell"></activity>
     </application>
 
 </manifest>

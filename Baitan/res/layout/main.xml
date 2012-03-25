@@ -14,5 +14,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="查看" />
+    
+    <Button
+        android:id="@+id/postBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发布" />
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搜索" />
+    <Button
+        android:id="@+id/wantBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="求购" />
 
 </LinearLayout>
