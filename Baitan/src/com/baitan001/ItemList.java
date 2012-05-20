@@ -28,8 +28,17 @@ public class ItemList extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.itemlist);
- 
-    	String request_URL = "http://www.baitan001.com/m/itemlist/1332485319/27"; 
+		
+		long sys_time = System.currentTimeMillis();
+		sys_time = sys_time / 1000;
+		String cur_time = String.valueOf(sys_time);
+		
+		
+		String location_ID = "27";
+		
+		String request_URL = "http://www.baitan001.com/m/itemlist/"+cur_time+"/"+location_ID + "/1"; 
+		
+    	//String request_URL = "http://www.baitan001.com/m/itemlist/1332485319/27"; 
         String response = "";                
         /** Retrieve default item list*/
         try {
@@ -39,10 +48,9 @@ public class ItemList extends Activity {
 			e.printStackTrace();
 		}
         response = "{items:" +  response +"}";
-        
-        ArrayList<ItemInfo> itemlist = (ArrayList<ItemInfo>)JSONParser(response);
-        
         TableLayout layout = (TableLayout)findViewById(R.id.tableLayout1);
+        ArrayList<ItemInfo> itemlist = (ArrayList<ItemInfo>)JSONParser(response);        
+
 		for (int i = 0; i < itemlist.size(); i++)
         		layout.addView(row(itemlist.get(i)));
 		/*for (int i = 0; i < itemlist.size(); i++){

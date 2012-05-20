@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#158684"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/itemlistview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0px"
+        android:background="#BBFFFFFF"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/cursorbar"
+        android:dividerHeight="2dip"
+        android:fastScrollEnabled="true"
+        android:focusable="true" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip">
+    </LinearLayout>
+
+</LinearLayout>

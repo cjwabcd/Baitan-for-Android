@@ -41,7 +41,7 @@ public class Dashboard extends Activity {
 	                        "com.baitan001.ItemList"); break;
 	        	case R.id.postBtn: 
 	                i.setClassName("com.baitan001",
-	                        "com.baitan001.sell"); break;          
+	                        "com.baitan001.Sell"); break;          
         	}
             startActivity(i);
         }
