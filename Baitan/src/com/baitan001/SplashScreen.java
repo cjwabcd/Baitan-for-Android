@@ -27,7 +27,7 @@ public class SplashScreen extends Activity {
                finish();
                Intent i = new Intent();
                i.setClassName("com.baitan001",
-                              "com.baitan001.Dashboard");
+                              "com.baitan001.BaitanTab");
                startActivity(i);
             }
          }

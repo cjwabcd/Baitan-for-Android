@@ -1,5 +1,9 @@
 package com.baitan001;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,8 +28,17 @@ public class ItemList extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.itemlist);
- 
-    	String request_URL = "http://tiaosao.org/book.json"; 
+		
+		long sys_time = System.currentTimeMillis();
+		sys_time = sys_time / 1000;
+		String cur_time = String.valueOf(sys_time);
+		
+		
+		String location_ID = "27";
+		
+		String request_URL = "http://www.baitan001.com/m/itemlist/"+cur_time+"/"+location_ID + "/1"; 
+		
+    	//String request_URL = "http://www.baitan001.com/m/itemlist/1332485319/27"; 
         String response = "";                
         /** Retrieve default item list*/
         try {
@@ -34,37 +47,51 @@ public class ItemList extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-        
-        ItemInfo item = (ItemInfo)JSONParser(response);
-        
+        response = "{items:" +  response +"}";
         TableLayout layout = (TableLayout)findViewById(R.id.tableLayout1);
-		for (int i = 0; i < 6; i++)
-        		layout.addView(row(item));
-        
+        ArrayList<ItemInfo> itemlist = (ArrayList<ItemInfo>)JSONParser(response);        
+
+		for (int i = 0; i < itemlist.size(); i++)
+        		layout.addView(row(itemlist.get(i)));
+		/*for (int i = 0; i < itemlist.size(); i++){
+			TableRow row = (TableRow) layout.findViewById(Integer.parseInt(itemlist.get(i).id));
+			Bitmap bitmap = connectionPool.getHttpBitmap(itemlist.get(i).doubansimg);
+				//Bitmap bitmap =null;
+			row.findViewById(Integer.parseInt(itemlist.get(i).id)).setImageBitmap(bitmap);
+		}*/
         
                
     }
     
     
     
-    private ItemInfo JSONParser(String response) {
+    private ArrayList<ItemInfo> JSONParser(String response) {
 		// TODO Read in a JSONString and generate an item object
-		ItemInfo item = new ItemInfo();
-		JSONObject jObj;
+		ArrayList<ItemInfo> itemlist = new ArrayList<ItemInfo>();
+
+		JSONObject jObj,jItem;
 		try {
+			
 			jObj = new JSONObject(response);
-			item.bookname = jObj.getString("bookname");
-			item.baitanprice = Integer.parseInt(jObj.getString("baitanprice"));
-			item.seller = jObj.getString("seller");
+			JSONArray items = jObj.getJSONArray("items"); 
+			for(int i = 0; i < items.length(); i++){
+				jItem = items.getJSONObject(i);
+				itemlist.add(new ItemInfo(
+						jItem.getString("id"),
+						jItem.getString("bookname"),
+						jItem.getString("contactpeople"),
+						jItem.getString("baitanprice"), 
+						jItem.getString("doubansimg")));
+			}
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return item;
+		
+
+		return itemlist;
 	}
-
-
 
 	private TableRow row (final ItemInfo item){
 		/*Retrieve info from Iteminfo object and generate an item row */
@@ -75,51 +102,50 @@ public class ItemList extends Activity {
 		layout.setLayoutParams(layoutParams);
 		layout.setBackgroundColor(Color.WHITE);
 		ImageView imageView=new ImageView(this);
-
 		Bitmap bitmap = connectionPool.getHttpBitmap(item.doubansimg);
+		//Bitmap bitmap =null;
 		imageView.setImageBitmap(bitmap);
 		imageView.setPadding(2,6,2,0);
+		imageView.setId(Integer.parseInt(item.id));
 		layout.addView(imageView);
 		TextView text=new TextView(this);
 		TextView price = new TextView(this);
-		text.setText("\n"+item.bookname + "\n卖家：" + item.seller);
-		price.setText("\n\n\n         ￥" +item.baitanprice);
+		text.setText("\n"+item.bookname + "\n卖家：" + item.contactpeople);
+		price.setText("\n\n\n￥" +item.baitanprice);
 		text.setTypeface(Typeface.DEFAULT_BOLD);	
 		layout.addView(text);
 		layout.addView(price);
-    	
-    	
-		OnTouchListener showItemListener = new OnTouchListener() {
-			Intent i = new Intent();
-
-			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Listen to the touch event on item row
-
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					v.setBackgroundColor(Color.GRAY);
-					break;
-				case MotionEvent.ACTION_UP:
-					v.setBackgroundColor(Color.WHITE);
-					i.putExtra("id", "book.json");
-					i.setClassName("com.baitan001", "com.baitan001.ShowItem");
-					startActivity(i);
-					break;
-				case MotionEvent.ACTION_CANCEL:
-					v.setBackgroundColor(Color.WHITE);
-					break;
-				default:
-					break;
-				}
-				return true;
-			}
-		};
-
-        
+		layout.setId(Integer.parseInt(item.id));
         layout.setOnTouchListener((OnTouchListener) showItemListener);
+        
         return layout;
     }
     
+	OnTouchListener showItemListener = new OnTouchListener() {
+		Intent i = new Intent();
+
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Listen to the touch event on item row
+
+			switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				v.setBackgroundColor(Color.GRAY);
+				break;
+			case MotionEvent.ACTION_UP:
+				v.setBackgroundColor(Color.WHITE);
+				i.putExtra("id", ""+v.getId());
+				i.setClassName("com.baitan001", "com.baitan001.ShowItem");
+				startActivity(i);
+				break;
+			case MotionEvent.ACTION_CANCEL:
+				v.setBackgroundColor(Color.WHITE);
+				break;
+			default:
+				break;
+			}
+			return true;
+		}
+	};
 
 
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, BaitanActivity!</string>
-    <string name="app_name">Baitan</string>
+    <string name="hello">毕业了来摆摊！</string>
+    <string name="app_name">毕业了来摆摊</string>
     <string name="desc">Description</string>
     <string name="signin">请登陆后继续操作</string>
 

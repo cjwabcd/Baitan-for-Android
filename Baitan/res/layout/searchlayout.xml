@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/searchmain" >
+
+    <LinearLayout
+        android:id="@+id/actionbar"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="#0055FF" >
+
+        <TextView
+            android:id="@+id/titlebar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="#000000"
+            android:textSize="22.0dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/searchformlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/keyword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </LinearLayout>
+
+</LinearLayout>

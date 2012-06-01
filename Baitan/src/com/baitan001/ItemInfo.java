@@ -3,28 +3,38 @@ package com.baitan001;
 
 public class ItemInfo{
 	
-	public String product_ID = "1238";
-	public String bookname = "Who moved my cheese";
-	public String bookauthor = "Whoknows";
-	public String alias = "Cheese";
-	public String isbn13 = "1232314";
+	public String id = "";
+	public String bookname = "";
+	public String bookauthor = "";
+	public String alias = "";
+	public String isbn13 = "";
 	public int bookcategoryid = 1;
-	public String doubansimg = "http://img1.douban.com/mpic/s1106991.jpg";
-	public int price = 0;
-	public int baitanprice = 15;
-	public String seller;
+	public String doubansimg = "";
+	public String price = "";
+	public String baitanprice = "";
+	public String contactpeople;
+	public String tel;
 	
 	public ItemInfo(){
-		product_ID = "1238";
+		id = "1238";
 		bookname = "Who moved my cheese";
 		bookauthor = "Whoknows";
 		alias = "Cheese";
 		isbn13 = "1232314";
 		bookcategoryid = 1;
 		doubansimg = "http://img1.douban.com/mpic/s1106991.jpg";
-		price = 0;
-		baitanprice = 0;
-		seller = "XiaoMaGe";
+		price = "10";
+		baitanprice = "2";
+		contactpeople = "XiaoMaGe";
+	}
+
+	public ItemInfo(String id, String bookname, String seller, String baitanprice, String doubansimg) {
+		// TODO Auto-generated constructor stub
+		this.id = id;
+		this.bookname = bookname;
+		this.contactpeople = seller;
+		this.baitanprice = baitanprice;
+		this.doubansimg = doubansimg;
 	}
 	
 	

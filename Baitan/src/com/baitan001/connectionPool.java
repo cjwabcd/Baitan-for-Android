@@ -28,8 +28,8 @@ class connectionPool extends Application{
 		}
 		
 		static String connInit(String request_url) throws Exception{
-	    	final String ITEM_LIST_URL = "http://www.tiaosao.org/book.json";
-	    	final String ITEM_INFO_URL_PREFIX = "http://www.tiaosao.org/book.json";
+	    	//final String ITEM_LIST_URL = "http://www.tiaosao.org/book.json";
+	    	//final String ITEM_INFO_URL_PREFIX = "http://www.tiaosao.org/book.json";
 	    	
 	    	
 	    	BufferedReader in = null;
@@ -37,7 +37,7 @@ class connectionPool extends Application{
 	    	try {
 	    		HttpClient client = new DefaultHttpClient();
 	    		HttpGet request = new HttpGet();
-	    		request.setURI(new URI(ITEM_LIST_URL));
+	    		request.setURI(new URI(request_url));
 	    		HttpResponse response = client.execute(request);
 	    		in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 	    		StringBuffer sb = new StringBuffer("");
