@@ -9,9 +9,6 @@ import org.json.JSONObject;
 import com.baitan001.AsyncImageLoader.ImageCallback;
 
 import android.app.Activity;
-import android.app.LocalActivityManager;
-import android.app.TabActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -23,20 +20,21 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.TextView;
-import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
-import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -52,6 +50,8 @@ public class BaitanHomePager extends Activity {
 	private int offset = 0;// 动画图片偏移量
 	private int currIndex = 0;// 当前页卡编号
 	private int bmpW;// 动画图片宽度
+	private int page_number;
+	private Button loadMoreBtn;
 
 	
 
@@ -62,15 +62,70 @@ public class BaitanHomePager extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.luckylayout);
+		initImageView();
 		initLuckyPager();
 		initLuckyBar();
-		initImageView();
-		refreshList(currIndex);
+		initLoadMore();
+		initRefreshButton();
+		refreshList();
 	}
 		
 	
 	
 	
+	private void initLoadMore() {
+		// TODO Auto-generated method stub
+		//LayoutInflater lmInflator = getLayoutInflator(R.layout.loadmore);
+		//Button loadMore = (Button) lmInflator.findViewById(R.id.loadMoreButton);
+		
+	}
+
+
+
+
+	private void initRefreshButton() {
+		// TODO Auto-generated method stub
+		TextView refrBtn = (TextView) findViewById(R.id.refresh);
+		refrBtn.setOnClickListener(new OnClickListener(){
+
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//page_number=0;
+				//itemlist.add(new ItemInfo("-1","-1","-1","-1","-1"));
+				refreshList();
+			}
+			
+		});
+		
+		/*
+		refrBtn.setOnTouchListener(new OnTouchListener(){
+
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					v.setBackgroundColor(Color.GRAY);
+					break;
+				case MotionEvent.ACTION_UP:
+					refreshList(currIndex);
+					break;
+				case MotionEvent.ACTION_CANCEL:
+					v.setBackgroundColor(Color.WHITE);
+					break;
+				default:
+					break;
+				}
+				
+				return false;
+			}
+			
+		});*/
+	}
+
+
+
+
 	/**
 	 * 初始化ViewPager
 	 */
@@ -140,33 +195,23 @@ public class BaitanHomePager extends Activity {
 	 */
 	public class MyOnPageChangeListener implements OnPageChangeListener {
 
-		int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
-		int two = one * 2;// 页卡1 -> 页卡3 偏移量
+		int one = offset * 2 + bmpW; // 页卡1 -> 页卡2 偏移量
 
 		public void onPageSelected(int arg0) {
+			//Log.e("Page","NO"+arg0);
 			Animation animation = null;
 			switch (arg0) {
 			case 0:
 				if (currIndex == 1) {
 					animation = new TranslateAnimation(one, 0, 0, 0);
-				} else if (currIndex == 2) {
-					animation = new TranslateAnimation(two, 0, 0, 0);
 				}
 				break;
 			case 1:
 				if (currIndex == 0) {
-					animation = new TranslateAnimation(offset, one, 0, 0);
-				} else if (currIndex == 2) {
-					animation = new TranslateAnimation(two, one, 0, 0);
-				}
+					animation = new TranslateAnimation(0, one, 0, 0);
+				} 
 				break;
-			case 2:
-				if (currIndex == 0) {
-					animation = new TranslateAnimation(offset, two, 0, 0);
-				} else if (currIndex == 1) {
-					animation = new TranslateAnimation(one, two, 0, 0);
-				}
-				break;
+
 			}
 			currIndex = arg0;
 			animation.setFillAfter(true);// True:图片停在动画结束位置
@@ -191,7 +236,7 @@ public class BaitanHomePager extends Activity {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenW = dm.widthPixels;// 获取分辨率宽度
-		offset = (screenW / 3 - bmpW) / 2;// 计算偏移量
+		offset = (screenW / 2 - bmpW) / 2;// 计算偏移量
 		Matrix matrix = new Matrix();
 		matrix.postTranslate(offset, 0);
 		cursor.setImageMatrix(matrix);// 设置动画初始位置
@@ -243,7 +288,7 @@ public class BaitanHomePager extends Activity {
 		}
 	}
 
-	private void refreshList(int currIndex) {
+	private void refreshList() {
 		// TODO load or refresh the item listview
 
 		long sys_time = System.currentTimeMillis();
@@ -251,9 +296,11 @@ public class BaitanHomePager extends Activity {
 		String cur_time = String.valueOf(sys_time);
 
 		String location_ID = "27";
+		page_number++;
+		
 
 		String request_URL = "http://www.baitan001.com/m/itemlist/" + cur_time
-				+ "/" + location_ID + "/1";
+				+ "/" + location_ID + "/" + page_number;
 
 		// String request_URL =
 		// "http://www.baitan001.com/m/itemlist/1332485319/27";
@@ -266,18 +313,46 @@ public class BaitanHomePager extends Activity {
 			e.printStackTrace();
 		}
 		response = "{items:" + response + "}";
-
-		itemlist = (List<ItemInfo>) JSONParser(response);
+		
 		ListView itemlist_layout = (ListView) booklayout
 				.findViewById(R.id.itemlistview);
 		ItemAdapter adapter = new ItemAdapter();
+		View loadMore = getLayoutInflater().inflate(R.layout.loadmore, null);
+		loadMoreBtn = (Button) loadMore.findViewById(R.id.loadMoreButton);
+		loadMoreBtn.setOnClickListener(new OnClickListener(){
 
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				loadMoreBtn.setText("loading..");
+				refreshList();
+			}});
+		
+		if (page_number != 1) {
+		//	itemlist.remove(itemlist.size()-1);
+			itemlist.addAll((List<ItemInfo>) JSONParser(response));
+		//	itemlist.add(new ItemInfo("-1","-1","-1","-1","-1"));
+			adapter.notifyDataSetChanged();
+			return;
+		}
+		
+		itemlist_layout.addFooterView(loadMore); 
+		itemlist = (List<ItemInfo>) JSONParser(response);
+		//itemlist.add(new ItemInfo("-1","-1","-1","-1","-1"));
+
+
+		itemlist_layout.setAdapter(adapter);
 		itemlist_layout.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2,
 					long arg3) {
 				Object obj = view.getTag();
 				if (obj != null) {
 					String id = obj.toString();
+					Log.e("test","more button begin");
+					if (id.equals("-1")){
+						Log.e("test","more button");
+						refreshList();
+						return;
+					}	
 					Intent intent = new Intent(BaitanHomePager.this,
 							ShowItem.class);
 					Bundle b = new Bundle();
@@ -288,11 +363,11 @@ public class BaitanHomePager extends Activity {
 			}
 
 		});
-		itemlist_layout.setAdapter(adapter);
+	
 	}
 	
 	
-
+/*
 	OnTouchListener showItemListener = new OnTouchListener() {
 		Intent i = new Intent();
 
@@ -318,7 +393,7 @@ public class BaitanHomePager extends Activity {
 			return true;
 		}
 	};
-
+*/
 	
 	/**
 	 * JSONParser
@@ -374,17 +449,27 @@ public class BaitanHomePager extends Activity {
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
+
+			ItemInfo item = itemlist.get(position);
+			convertView = LayoutInflater.from(getApplicationContext()).inflate(
+					R.layout.itemtempl, null);
+			if (item.id.equals("-1")){
+				convertView.setTag(item.id);
+				TextView  bookname = (TextView) convertView.findViewById(R.id.bookname);
+				bookname.setText("更多...");
+ 				return convertView;
+			}			
+			
 			asyncImageLoader = new AsyncImageLoader();
 
-			convertView = LayoutInflater.from(getApplicationContext()).inflate(
-					R.layout.item, null);
+			
 
 			//ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
 			TextView  bookname = (TextView) convertView.findViewById(R.id.bookname);
 			TextView  price = (TextView) convertView.findViewById(R.id.price);
 			TextView  contactpeople = (TextView) convertView.findViewById(R.id.contactpeople);
 			ImageView image = (ImageView) convertView.findViewById(R.id.image);
-			ItemInfo item = itemlist.get(position);
+			
 			if (item != null) {
 				convertView.setTag(item.id);
 				bookname.setText(item.bookname);

@@ -15,7 +15,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="登陆摆摊"
+            android:text="摆一个摊"
             android:textColor="#000000"
             android:textSize="22.0dip" />
 </LinearLayout>
@@ -24,7 +24,7 @@
     android:id="@+id/prompt"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="登陆摆摊"
+    android:text=""
     android:textColor="#FFFFFF"
     android:textSize="22.0dip" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="请输入用户名" />
+        android:text="书名" />
 
     <EditText
         android:id="@+id/signin_password"
@@ -43,7 +43,6 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/signin_username"
         android:layout_marginTop="27dp"
-        android:inputType="textPassword"
         android:text="请输入密码" />
 
     <CheckBox

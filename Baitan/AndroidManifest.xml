@@ -27,6 +27,11 @@
             <activity android:name="Sell"></activity>
             <activity android:name="BaitanHomePager"></activity>
             <activity android:name="BaitanTab"></activity>
+            <activity android:name="SearchActivity"></activity>
+            <activity android:name="FavoriteActivity"></activity>
+            <activity android:name="SettingsActivity"></activity>
+            <activity android:name="NewItemActivity"></activity>
+            
 
     </application>
 

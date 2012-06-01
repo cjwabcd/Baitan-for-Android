@@ -3,26 +3,32 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
-        <LinearLayout
+
+    <LinearLayout
         android:id="@+id/actionbar"
         android:layout_width="fill_parent"
-        android:layout_height="50.0dip"
-        android:background="#0055FF" >
+        android:layout_height="40.0dip"
+        android:background="@drawable/actionbar"
+        android:orientation="horizontal" 
+        android:layout_gravity="left">
+
+        <ImageView
+            android:id="@+id/logo_web"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:src="@drawable/logo_web" />
 
         <TextView
-            android:id="@+id/titlebar"
+            android:id="@+id/refresh"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="@string/hello"
-            android:textColor="#000000"
+            android:gravity="center_vertical|right"
+            android:text="刷新"
+            android:textColor="#FFFFFF"
             android:textSize="22.0dip" />
     </LinearLayout>
-    
-    
-    
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
@@ -48,15 +54,14 @@
             android:text="物品"
             android:textColor="#000000"
             android:textSize="22.0dip" />
-
     </LinearLayout>
 
     <ImageView
         android:id="@+id/cursor"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:scaleType="matrix" 
-        android:src="@drawable/cursorbar"/>
+        android:scaleType="matrix"
+        android:src="@drawable/cursorbar" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/luckyPager"

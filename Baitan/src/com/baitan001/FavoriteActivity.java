@@ -10,7 +10,7 @@ public class FavoriteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favoritelayout);
         
-
+        
         
     }
     

@@ -32,61 +32,6 @@
         android:background="#000000"
         android:persistentDrawingCache="animation" />
     
-    <LinearLayout
-        android:id="@+id/bottomButtons"
-        android:layout_width="fill_parent"
-        android:layout_height="50.0dip"
-        android:background="#FFFFFF" >
-
-        <TextView
-            android:id="@+id/luckyButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="逛逛"
-            android:textColor="#000000"
-            android:textSize="22.0dip" />
-
-        <TextView
-            android:id="@+id/searchButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="搜索"
-            android:textColor="#000000"
-            android:textSize="22.0dip" />
-
-        <TextView
-            android:id="@+id/newItemButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="摆"
-            android:textColor="#000000"
-            android:textSize="22.0dip" />
-
-        <TextView
-            android:id="@+id/favoriteButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="收藏"
-            android:textColor="#000000"
-            android:textSize="22.0dip" />
-
-        <TextView
-            android:id="@+id/settingsButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="设置"
-            android:textColor="#000000"
-            android:textSize="22.0dip" />
-    </LinearLayout>
+    
 
 </LinearLayout>

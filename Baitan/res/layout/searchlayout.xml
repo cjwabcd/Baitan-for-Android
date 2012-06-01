@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:id="@+id/searchmain" >
 
     <LinearLayout
         android:id="@+id/actionbar"
@@ -21,38 +22,24 @@
             android:textSize="22.0dip" />
     </LinearLayout>
 
-
-
-    
-    
-     <LinearLayout
-         android:id="@+id/searchformlayout"
-         android:layout_width="fill_parent"
-         android:layout_height="50.0dip"
-         android:background="#0055FF"
-         android:orientation="horizontal" >
+    <LinearLayout
+        android:id="@+id/searchformlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:orientation="horizontal" >
 
         <EditText
-        android:id="@+id/editText1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+            android:id="@+id/keyword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            <requestFocus />
+        </EditText>
 
-        <requestFocus />
-        
-    </EditText>
         <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+            android:id="@+id/searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
     </LinearLayout>
-  <android.support.v4.view.ViewPager
-        android:id="@+id/globalPager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1.0"
-        android:background="#000000"
-        android:persistentDrawingCache="animation" />
 
 </LinearLayout>
