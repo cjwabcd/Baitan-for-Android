@@ -4,9 +4,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     
-	  <Button  
+	  <TextView  
       android:id="@+id/loadMoreButton"  
       android:layout_width="fill_parent"  
-      android:layout_height="wrap_content"
-      android:text="查看更多..." /> 
+      android:layout_height="40dip"
+      android:text="查看更多..."
+      android:gravity="center"
+      android:textSize="17dp" /> 
 </LinearLayout>

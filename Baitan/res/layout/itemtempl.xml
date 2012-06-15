@@ -6,38 +6,81 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="50dip"
+        android:layout_height="80dip"
+        android:paddingBottom="5dip"
+        android:paddingLeft="5dip"
+        android:paddingRight="3dip"
+        android:paddingTop="5dip"
+        android:src="@drawable/loading" >
     </ImageView>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="200dip"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/bookname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#424952"
-            android:textSize="15dp" >
+            android:layout_marginTop="10dip"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="bold" >
         </TextView>
-
-        <TextView
-            android:id="@+id/contactpeople"
+		<TextView
+            android:id="@+id/publisher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#424952"
             android:textSize="13dp" >
         </TextView>
+        <TextView
+            android:id="@+id/contactpeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dip"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/price"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#f7a200"
-            android:textSize="12dp" >
+            android:layout_marginRight="10dip"
+            android:background="#FFFFFF"
+            android:gravity="right"
+            android:paddingTop="20dip"
+            android:textColor="#1180bb"
+            android:textSize="19dp" >
         </TextView>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/location_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="天津大学" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -10,10 +10,10 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="0px"
-        android:background="#BBFFFFFF"
+        android:background="#FFFFFF"
         android:cacheColorHint="#00000000"
-        android:divider="@drawable/cursorbar"
-        android:dividerHeight="2dip"
+        android:divider="#C6C6c6"
+        android:dividerHeight="1dip"
         android:fastScrollEnabled="true"
         android:focusable="true" >
     </ListView>
@@ -21,7 +21,8 @@
     <LinearLayout
         android:id="@+id/toolbarLayout"
         android:layout_width="fill_parent"
-        android:layout_height="2dip">
+        android:layout_height="1dip"
+        android:background="#c6c6c6">
     </LinearLayout>
 
 </LinearLayout>

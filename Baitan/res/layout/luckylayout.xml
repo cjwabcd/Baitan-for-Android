@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#66CCFF" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/actionbar"
         android:layout_width="fill_parent"
         android:layout_height="40.0dip"
@@ -16,24 +17,27 @@
             android:id="@+id/logo_web"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:paddingTop="1dip"
+            android:paddingBottom="1dip"
             android:gravity="center"
             android:src="@drawable/logo_web" />
 
-        <TextView
+        <ImageView
             android:id="@+id/refresh"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:gravity="center_vertical|right"
-            android:text="刷新"
-            android:textColor="#FFFFFF"
-            android:textSize="22.0dip" />
-    </LinearLayout>
+            android:layout_alignParentRight="true"
+            android:paddingRight="5dip"
+            android:src="@drawable/refresh_icon"
+            android:textColor="#FFFFFF" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="30.0dip"
-        android:background="#FFFFFF" >
+        android:layout_height="25.0dip"
+        android:background="#66CCff" >
 
         <TextView
             android:id="@+id/bookslist"
@@ -42,8 +46,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="图书"
-            android:textColor="#000000"
-            android:textSize="22.0dip" />
+            android:textColor="#FFFFFF"
+            android:textSize="20.0dip" />
 
         <TextView
             android:id="@+id/goodslist"
@@ -52,8 +56,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="物品"
-            android:textColor="#000000"
-            android:textSize="22.0dip" />
+            android:textColor="#FFFFFF"
+            android:textSize="20.0dip" />
     </LinearLayout>
 
     <ImageView
@@ -61,7 +65,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scaleType="matrix"
-        android:src="@drawable/cursorbar" />
+        android:src="@drawable/cursorbar" 
+        android:background="#66CCFF" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/luckyPager"
