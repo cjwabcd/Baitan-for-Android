@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/actionbar"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:background="@drawable/actionbar" >
+
+        <TextView
+            android:id="@+id/titlebar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="图书"
+            android:textColor="#FFFFFF"
+            android:textSize="22.0dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="200dip" 
+            android:paddingLeft="2dip"
+            android:paddingRight="2dip"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/newitem_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/loading" />
+            
+            <Button
+                android:id="@+id/newitem_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拍照" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/newitem_bookname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="书名" />
+
+        <EditText
+            android:id="@+id/newitem_ISBN"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="ISBN" />
+
+        <EditText
+            android:id="@+id/newitem_price"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="价格" />
+
+        <EditText
+            android:id="@+id/newitem_school"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="学校" />
+
+        <Button
+            android:id="@+id/newitem_publish"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="发布" />
+    </LinearLayout>
+
+</LinearLayout>
