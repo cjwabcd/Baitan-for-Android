@@ -29,6 +29,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -67,6 +68,28 @@ public class BaitanHomePager extends Activity {
 	private void initActionBar() {
 		// TODO Auto-generated method stub
 		initRefreshButton();
+		locate();
+	}
+
+
+	private void locate() {
+		// TODO Auto-generated method stub
+		LinearLayout location = (LinearLayout) findViewById(R.id.location);
+		TextView tv_city = (TextView)findViewById(R.id.city);
+		TextView sc_city = (TextView)findViewById(R.id.school);
+		tv_city.setText(UserInfo.getCity());
+		sc_city.setText(UserInfo.getSchool());		
+		location.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(BaitanHomePager.this,
+						CurrentLocation.class);
+				Bundle b = new Bundle();
+				startActivityForResult(intent, 0);
+			}
+			
+		});
 	}
 
 

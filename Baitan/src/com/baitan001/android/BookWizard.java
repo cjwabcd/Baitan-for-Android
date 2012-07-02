@@ -21,22 +21,30 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.baitan001.android.zxing.CaptureActivity;
+import com.baitan001.android.zxing.IntentIntegrator;
+import com.baitan001.android.zxing.IntentResult;
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class BookWizard extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private Bitmap photo = null;
 	private String photoPath = null;
+	Editable et;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -44,13 +52,21 @@ public class BookWizard extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bookwizard);
 
+		TextView tv_isbn = (TextView) findViewById(R.id.newitem_ISBN);
+		et = tv_isbn.getEditableText();
+		
 		initBtnLsnr();
+		
 
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+		IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+		
+		if (requestCode == IntentIntegrator.REQUEST_CODE){
+			et.clear();
+			et.append(data.getStringExtra("SCAN_RESULT"));
+		}else if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				// Bundle extras = data.getExtras();
 				photoPath = data.getDataString();
@@ -84,6 +100,7 @@ public class BookWizard extends Activity {
 
 		Button photoBtn = (Button) findViewById(R.id.newitem_photo);
 		Button publishBtn = (Button) findViewById(R.id.newitem_publish);
+		Button swipe = (Button) findViewById(R.id.newitem_swipe);
 		photoBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -91,6 +108,7 @@ public class BookWizard extends Activity {
 				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new
 				// File(
 				// Environment.getExternalStorageDirectory(), "temp.jpg")));
+				
 				startActivityForResult(intent,
 						CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 			}
@@ -103,6 +121,19 @@ public class BookWizard extends Activity {
 			}
 
 		});
+		
+		swipe.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(BookWizard.this,CaptureActivity.class);
+			      intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+			      intent.putExtra("SCAN_WIDTH", 800);
+			      intent.putExtra("SCAN_HEIGHT", 200);
+			      intent.putExtra("PROMPT_MESSAGE", "请将相机对准条形码，便于对焦，不要靠得太近");
+				startActivityForResult(intent, IntentIntegrator.REQUEST_CODE);
+			}
+		});
+		
 	}
 
 	protected void publishItem() {

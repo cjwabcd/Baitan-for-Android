@@ -55,11 +55,25 @@
             android:layout_height="wrap_content"
             android:text="书名" />
 
-        <EditText
-            android:id="@+id/newitem_ISBN"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+             <EditText
+            android:id="@+id/newitem_ISBN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="ISBN" />
+
+             <Button
+                 android:id="@+id/newitem_swipe"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="扫" />
+            
+        </LinearLayout>
+        
 
         <EditText
             android:id="@+id/newitem_price"
