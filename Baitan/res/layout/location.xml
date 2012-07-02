@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/actionbar"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:background="@drawable/actionbar"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+         <TextView
+            android:id="@+id/Province"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="当前   "
+            android:textColor="#FFFFFF"
+            android:textSize="22.0dip" />
+        
+        
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="北京-"
+            android:textColor="#FFFFFF"
+            android:textSize="22.0dip" />
+        
+        <TextView
+            android:id="@+id/school"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="北京邮电大学"
+            android:textColor="#FFFFFF"
+            android:textSize="22.0dip" />
+        
+    </LinearLayout>
+    
+    
+    
+    
+    <ListView
+        android:id="@+id/citylistview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0px"
+        android:background="#FFFFFF"
+        android:cacheColorHint="#00000000"
+        android:divider="#C6C6c6"
+        android:dividerHeight="1dip"
+        android:fastScrollEnabled="true"
+        android:focusable="true" >
+    </ListView>
+    
+    
+
+</LinearLayout>
